@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+long double precision( int n, long double euler)
+{
+    if (n == 0){
+      return ceil (euler);
+    } else if (n == 1){
+      return floor ((euler * 10 ) + 0.5) / 10;
+    }else if ( n ==2){
+    return ceil((euler * 100 ) + 0.05) / 100;
+  } else if ( n == 3){
+    return floor ((euler * 1000 ) + 0.005) / 1000;
+  } else if (n == 4){
+    return floor ((euler * 10000 ) + 0.0005) / 10000;
+  }else {
+    return euler;
+  }
+}
+
+long double calculate_e (){
+  long double euler = 2.5;
+  long double c = 2.0;
+  long double d, factorial;
+  for (int i=0;i<5;i++){
+    c = c + 1.0;
+    d = c;
+    factorial = c;
+    while (d>1){
+      d = d - 1.0;
+      factorial = factorial * d;
+    }
+    euler = euler + (1.0/factorial);
+  }
+  return euler;
+}
+
+int main(){
+  int n;
+  cout << "Tell me the number of decimal points that you want in the constant 'e', (between 0 and 5)"<< endl;
+  cin>> n;
+  long double euler = calculate_e ();
+  long double euler2 = precision(n, euler);
+  cout << euler2 << endl;
+  return 0;
+}
